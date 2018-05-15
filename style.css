@@ -1,18 +1,111 @@
-*{
-    /* border: red dotted 1px; */
-}
-
-ul {
-    margin: 40px;
-    border: purple solid 10px;
-    padding: 80px;
-    width: 50px;
-    height: 100px;
-}
-
-.me {
+section{
     margin-left: 30px;
-    background-color: orange;
+    float: left;
+    height: 500px;
+    width: 250px;
+    border: black solid 10px;
+    border-radius: 30px;
+    background: #777;
+    opacity: 0.8;
+}
+
+header{
+    height: 120px;
+    margin-bottom: 50px;
+    
+}
+
+header img {
+    
+    margin-left: 30px;
+    margin-top: 20px;
+    float: left;
+    
+}
+nav ul{
+    
+    float: left;
+    margin-top: 50px;
+}
+nav li {
+    border: transparent solid 2px;
+    font-family: Impact, Haettenschweiler, sans-serif;
+    color: black;
+    padding: 10px 30px;
+    background: #777 ;
+    display: inline-block;
+    text-align: center;
+    margin: auto 30px;
+    range: auto;
+    border-radius: 10px;
+    
+    /* float: left; */
+}
+
+nav li:hover{
+    background: #999;
+    border: red solid 2px;
+}
+
+body{
+    background-image: url(img/busbackground.jpg);
+    background-size: cover;
+}
 
 
+button{
+    width: 900px;
+    height: 30px;
+    margin: 10px 100px;
+    background: #777
+}
+footer{
+    height: 100px;
+    /* border: red dotted 2px; */
+}
+
+#product1{
+    width: 300px;
+    height: 300px;
+}
+#product2{
+    width: 300px;
+    height: 300px;
+}
+#product3{
+    width: 300px;
+    height: 300px;
+}
+#nameList {
+    padding: 30px;
+    
+    float: left;
+
+}
+clickList{
+   
+}
+
+div{
+    /* border: red dotted 2px; */
+    float: left;
+}
+
+div img{
+    margin: auto 15px;
+    border: black solid 10px;
+    border-radius: 30px;
+}
+
+div img:hover{
+    border: red solid 10px;
+}
+p{
+    padding: 20px;
+    width: 900px;
+    margin: 40px 350px;
+    background: #777;
+    opacity: 0.8;
+    border: black solid 10px;
+    border-radius: 30px;
 }
