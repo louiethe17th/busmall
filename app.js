@@ -7,6 +7,7 @@ var imgEl2 = document.getElementById('product2');
 var imgEl3 = document.getElementById('product3');
 var clickAmmount = document.getElementById('clickList');
 var nameList = document.getElementById('nameList');
+var totalClicks = 0;
 
 var pictureIndex1 = 0;
 var pictureIndex2 = 1;
@@ -21,66 +22,100 @@ function Products(src, name) {
     allPictures.push(this);
 }
 
-imgEl1.addEventListener('click', function () {
+imgEl1.addEventListener('click', img1Callback);
+
+function img1Callback() {
     allPictures[pictureIndex1].clicked++;
     chooseNewProduct();
-    totalClicks();
-})
+    totalClicks++
 
-imgEl2.addEventListener('click', function () {
+}
+
+
+imgEl2.addEventListener('click', img2Callback);
+
+function img2Callback() {
     allPictures[pictureIndex2].clicked++;
     chooseNewProduct();
-    totalClicks();
-})
+    totalClicks++
+}
 
-imgEl3.addEventListener('click', function () {
+
+
+
+imgEl3.addEventListener('click', img3Callback);
+
+function img3Callback() {
     allPictures[pictureIndex3].clicked++;
     chooseNewProduct();
-    totalClicks();
-})
+    totalClicks++
+}
 
 function chooseNewProduct() {
-    pictureIndex1 = Math.floor(Math.random() * allPictures.length);
+    checkTotalClicks();
+
+    var cantBeThis = [pictureIndex1, pictureIndex2, pictureIndex3];
+    // console.log(cantBeThis);
+
+    // var previous1 = pictureIndex1;
+    // var previous2 = pictureIndex2;
+    // var previous3 = pictureIndex3;
+
+    do {
+        pictureIndex1 = Math.floor(Math.random() * allPictures.length);
+    } while (cantBeThis.includes(pictureIndex1));
+    cantBeThis.push(pictureIndex1);
+
+    do {
+        pictureIndex2 = Math.floor(Math.random() * allPictures.length);
+    } while (cantBeThis.includes(pictureIndex2));
+    cantBeThis.push(pictureIndex2);
+
+
+    do {
+        pictureIndex3 = Math.floor(Math.random() * allPictures.length);
+    } while (cantBeThis.includes(pictureIndex3));
+    cantBeThis.push(pictureIndex3);
+
+
     imgEl1.src = allPictures[pictureIndex1].src;
-    pictureIndex2 = Math.floor(Math.random() * allPictures.length);
     imgEl2.src = allPictures[pictureIndex2].src;
-    pictureIndex3 = Math.floor(Math.random() * allPictures.length);
     imgEl3.src = allPictures[pictureIndex3].src;
 }
 
-function totalClicks() {
 
-    clickList.innerHTML = ''
+
+function RenderResults() {
+
 
     for (i in allPictures) {
 
-        
 
-        var clLi = document.createElement('li');
-        clLi.textContent = allPictures[i].clicked;
-
-        clickAmmount.appendChild(clLi);
-
-
-    }
-}
-
-
-function productNames() {
-
-    
-    for (i in allPictures) {
-
-        
 
         var nameLi = document.createElement('li');
-        nameLi.textContent = allPictures[i].name + ': ';
+        nameLi.textContent = allPictures[i].name + ' clicked: ' + allPictures[i].clicked + ' times.'
 
         nameList.appendChild(nameLi);
 
 
     }
 }
+
+function checkTotalClicks() {
+    if (totalClicks === 25) {
+
+
+        RenderResults();
+
+        imgEl1.removeEventListener('click', img1Callback);
+
+        imgEl2.removeEventListener('click', img2Callback);
+
+        imgEl3.removeEventListener('click', img3Callback);
+
+    }
+}
+
 
 new Products('img/bag.jpg', 'Nice bag');
 new Products('img/banana.jpg', 'Banana');
@@ -107,5 +142,4 @@ new Products('img/wine-glass.jpg', 'wine glass');
 
 
 chooseNewProduct();
-productNames();
-totalClicks();
+
