@@ -11,8 +11,8 @@ section{
 
 header{
     height: 120px;
-    background: #777;
     margin-bottom: 50px;
+    
 }
 
 header img {
@@ -23,16 +23,28 @@ header img {
     
 }
 nav ul{
+    
     float: left;
     margin-top: 50px;
 }
 nav li {
-    
+    border: transparent solid 2px;
+    font-family: Impact, Haettenschweiler, sans-serif;
+    color: black;
+    padding: 10px 30px;
+    background: #777 ;
     display: inline-block;
     text-align: center;
     margin: auto 30px;
+    range: auto;
+    border-radius: 10px;
     
     /* float: left; */
+}
+
+nav li:hover{
+    background: #999;
+    border: red solid 2px;
 }
 
 body{
@@ -83,6 +95,10 @@ div img{
     margin: auto 15px;
     border: black solid 10px;
     border-radius: 30px;
+}
+
+div img:hover{
+    border: red solid 10px;
 }
 p{
     padding: 20px;
