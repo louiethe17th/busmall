@@ -102,10 +102,24 @@ div img:hover{
 }
 p{
     padding: 20px;
-    width: 900px;
-    margin: 40px 350px;
+    width: 200px;
+    height: 200px;
+    margin: 40px 325px;
     background: #777;
     opacity: 0.8;
     border: black solid 10px;
     border-radius: 30px;
+    overflow: scroll;
+}
+
+canvas{
+    float: right;
+    /* border: red dotted 2px; */
+    margin-right: 30px;
+    background: rgba(119,119,119,0.8);
+    border: black solid 10px;
+    border-radius: 30px;
+    
+
+    /* opacity: 0.8; */
 }
