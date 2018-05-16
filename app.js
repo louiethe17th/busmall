@@ -9,19 +9,54 @@ var clickAmmount = document.getElementById('clickList');
 var nameList = document.getElementById('nameList');
 var totalClicks = 0;
 var productChart;
+var localStoragePeoduct;
 
 var pictureIndex1 = 0;
 var pictureIndex2 = 1;
 var pictureIndex3 = 2;
 
+
 function Products(src, name) {
     this.src = src;
     this.name = name;
-    
+
     this.clicked = 0;
 
     allPictures.push(this);
 }
+
+if (localStorage.allPictures) {
+    allPictures = JSON.parse(localStorage.getItem('allPictures'));
+    console.log('Pulled from local storage');
+} else {
+    console.log('Building new local data')
+    new Products('img/bag.jpg', 'Nice bag');
+    new Products('img/banana.jpg', 'Banana');
+    new Products('img/bathroom.jpg', 'Bathroom');
+    new Products('img/boots.jpg', 'Boots');
+    new Products('img/breakfast.jpg', 'breakfast');
+    new Products('img/bubblegum.jpg', 'bubblegum');
+    new Products('img/chair.jpg', 'chair');
+    new Products('img/cthulhu.jpg', 'Cthulhu');
+    new Products('img/dog-duck.jpg', 'dog duck');
+    new Products('img/dragon.jpg', 'dragon');
+    new Products('img/pen.jpg', 'pen');
+    new Products('img/pet-sweep.jpg', 'pet sweep');
+    new Products('img/scissors.jpg', 'scissors');
+    new Products('img/shark.jpg', 'shark');
+    new Products('img/sweep.png', 'sweep');
+    new Products('img/tauntaun.jpg', 'tauntaun');
+    new Products('img/unicorn.jpg', 'unicorn');
+    new Products('img/usb.gif', 'usb');
+    new Products('img/water-can.jpg', 'water-can');
+    new Products('img/wine-glass.jpg', 'wine glass');
+
+    localStorage.setItem('allPictures', JSON.stringify(allPictures));
+}
+
+
+
+
 
 imgEl1.addEventListener('click', img1Callback);
 
@@ -106,47 +141,49 @@ function RenderResults() {
 function checkTotalClicks() {
     if (totalClicks === 25) {
 
-        
+
         imgEl1.removeEventListener('click', img1Callback);
-        
+
         imgEl2.removeEventListener('click', img2Callback);
-        
+
         imgEl3.removeEventListener('click', img3Callback);
-        
-                RenderResults();
-                drawChart();
+
+        RenderResults();
+        drawChart();
+
+        localStorage.setItem('allPictures', JSON.stringify(allPictures));
 
     }
 }
 
 
-new Products('img/bag.jpg', 'Nice bag');
-new Products('img/banana.jpg', 'Banana');
-new Products('img/bathroom.jpg', 'Bathroom');
-new Products('img/boots.jpg', 'Boots');
-new Products('img/breakfast.jpg', 'breakfast');
-new Products('img/bubblegum.jpg', 'bubblegum');
-new Products('img/chair.jpg', 'chair');
-new Products('img/cthulhu.jpg', 'Cthulhu');
-new Products('img/dog-duck.jpg', 'dog duck');
-new Products('img/dragon.jpg', 'dragon');
-new Products('img/pen.jpg', 'pen');
-new Products('img/pet-sweep.jpg', 'pet sweep');
-new Products('img/scissors.jpg', 'scissors');
-new Products('img/shark.jpg', 'shark');
-new Products('img/sweep.png', 'sweep');
-new Products('img/tauntaun.jpg', 'tauntaun');
-new Products('img/unicorn.jpg', 'unicorn');
-new Products('img/usb.gif', 'usb');
-new Products('img/water-can.jpg', 'water-can');
-new Products('img/wine-glass.jpg', 'wine glass');
+// new Products('img/bag.jpg', 'Nice bag');
+// new Products('img/banana.jpg', 'Banana');
+// new Products('img/bathroom.jpg', 'Bathroom');
+// new Products('img/boots.jpg', 'Boots');
+// new Products('img/breakfast.jpg', 'breakfast');
+// new Products('img/bubblegum.jpg', 'bubblegum');
+// new Products('img/chair.jpg', 'chair');
+// new Products('img/cthulhu.jpg', 'Cthulhu');
+// new Products('img/dog-duck.jpg', 'dog duck');
+// new Products('img/dragon.jpg', 'dragon');
+// new Products('img/pen.jpg', 'pen');
+// new Products('img/pet-sweep.jpg', 'pet sweep');
+// new Products('img/scissors.jpg', 'scissors');
+// new Products('img/shark.jpg', 'shark');
+// new Products('img/sweep.png', 'sweep');
+// new Products('img/tauntaun.jpg', 'tauntaun');
+// new Products('img/unicorn.jpg', 'unicorn');
+// new Products('img/usb.gif', 'usb');
+// new Products('img/water-can.jpg', 'water-can');
+// new Products('img/wine-glass.jpg', 'wine glass');
 
 
 var votes = [];
 var names = [];
 
-function updateChartArray(){
-    for ( var i = 0; i < allPictures.length; i++){
+function updateChartArray() {
+    for (var i = 0; i < allPictures.length; i++) {
         names[i] = allPictures[i].name;
         votes[i] = allPictures[i].clicked;
     }
@@ -161,7 +198,7 @@ var data = {
     labels: names,
     datasets: [{
         data: votes,
-        backgroundColor:[
+        backgroundColor: [
             '#bcb65e',
             '#16df7b',
             '#44caa2',
@@ -206,38 +243,36 @@ var data = {
             'purple'
 
         ],
-        BackgroundColor: [
-            'white'
-        ]
+
     }]
 }
 
 function drawChart() {
     var ctx = document.getElementById('votes-chart').getContext('2d');
     productChart = new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      
-      options: {
-        responsive: false,
-        animation: {
-          duration: 3000,
-          easing: 'easeOutQuint'
+        type: 'bar',
+        data: data,
+
+        options: {
+            responsive: false,
+            animation: {
+                duration: 3000,
+                easing: 'easeOutQuint'
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 10,
+                    min: 0,
+                    stepSize: 1.0
+                }
+            }]
         }
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            max: 10,
-            min: 0,
-            stepSize: 1.0
-          }
-        }]
-      }
     });
     chartDrawn = true;
-  }
-  
+}
+
 
 
 chooseNewProduct();
